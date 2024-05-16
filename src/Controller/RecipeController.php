@@ -10,12 +10,17 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RecipeController extends AbstractController
 {
     // lister les recettes
     #[Route('/recipe', name: 'recipe.index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(
         RecipeRepository $repository,
         PaginatorInterface $paginator,
@@ -34,6 +39,7 @@ class RecipeController extends AbstractController
 
     //creer une recette
     #[Route('/recipe/creation', name: 'recipe.new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
         public function new(
         Request $request,
         EntityManagerInterface $manager
@@ -62,12 +68,17 @@ class RecipeController extends AbstractController
 
         //editer une recette
         #[Route('/recipe/edition/{id}', name: 'recipe.edit')]
+        #[IsGranted('ROLE_USER')]
         public function edit(
             Recipe $recipe,
             Request $request,
             EntityManagerInterface $manager
         ): Response
         {
+            // Vérifie si l'utilisateur est le propriétaire de la recette
+        if ($recipe->getUser() !== $this->getUser()) {
+            throw new AccessDeniedException('Vous ne pouvez pas modifier cet recette car vous n\'en êtes pas le propriétaire.');
+        }
             $form = $this->createForm(RecipeType::class, $recipe);
     
             $form->handleRequest($request);
