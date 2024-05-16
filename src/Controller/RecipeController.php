@@ -123,7 +123,7 @@ class RecipeController extends AbstractController
         $recipes = $paginator->paginate(
             $repository->findPublicRecipes(null),
             $request->query->getInt('page', 1),
-            10
+            50
         );
 
         return $this->render('pages/recipe/index_public.html.twig', [
@@ -155,26 +155,21 @@ class RecipeController extends AbstractController
 
             if (!$existingMark) {
                 $manager->persist($mark);
-            }else{
+            } else {
                 $existingMark->setMark(
                     $form->getData()->getMark()
                 );
             }
-                $manager->flush();
-                $this->addFlash('success', 'La note a bien été pris en compte!');
+            $manager->flush();
+            $this->addFlash('success', 'La note a bien été pris en compte!');
 
-                return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
-            
-            
+            return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
         }
 
 
         // Vérifier si la recette est publique
         if ($recipe->getIsPublic()) {
-            // Vérifier si l'utilisateur a le rôle ROLE_USER
-            if (!$authorizationChecker->isGranted('ROLE_USER')) {
-                throw new AccessDeniedException('Accès refusé. Vous devez être connecté.');
-            }
+            // La recette est publique, donc accessible à tous (utilisateurs connectés et visiteurs)
 
             // Afficher la recette
             return $this->render('pages/recipe/show.html.twig', [
@@ -182,8 +177,20 @@ class RecipeController extends AbstractController
                 'form' => $form->createView()
             ]);
         } else {
-            // Si la recette n'est pas publique, accès refusé
-            throw new AccessDeniedException('Accès refusé. Cette recette n\'est pas publique.');
+            // La recette n'est pas publique, vérifier si l'utilisateur est connecté et s'il est le propriétaire
+            if ($authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') && $recipe->getUser() === $this->getUser()) {
+                // L'utilisateur est connecté et est le propriétaire de la recette, donc peut accéder à la recette même si elle n'est pas publique
+
+                // Afficher la recette avec le formulaire de modification
+                return $this->render('pages/recipe/show.html.twig', [
+                    'recipe' => $recipe,
+                    'form' => $form->createView()
+                ]);
+            } else {
+                // L'utilisateur n'est pas connecté ou n'est pas le propriétaire de la recette
+                // Dans ce cas, l'accès à la recette non publique est refusé
+                throw new AccessDeniedException('Accès refusé. Cette recette n\'est pas publique.');
+            }
         }
     }
 }

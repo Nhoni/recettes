@@ -74,7 +74,7 @@ class AppFixtures extends Fixture
         }
 
         //Notes
-        $notes = [];
+        $mark = [];
         foreach ($recipes as $recipe) {
             for ($m = 0; $m < mt_rand(0, 4); $m++) {
                 $mark = new Mark();
