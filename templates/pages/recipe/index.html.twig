@@ -32,7 +32,8 @@
 						<th scope="col">Prix</th>
 						<th scope="col">Difficulté</th>
 						<th scope="col">Date de création</th>
-						<th scope="col">Editer</th>
+						<th scope="col">Voir</th>
+						<th scope="col">Modifier</th>
 						<th scope="col">Supprimer</th>
 					</tr>
 				</thead>
@@ -57,7 +58,10 @@
 							</td>
 							<td>{{ recipe.createdAt|date('d/m/Y') }}</td>
 							<td>
-								<a href="{{path('recipe.edit', { id: recipe.id}) }}" class="btn btn-info">Modifier</a>
+								<a href="{{path('recipe.show', { id: recipe.id}) }}" class="btn btn-info">Voir</a>
+							</td>
+							<td>
+								<a href="{{path('recipe.edit', { id: recipe.id}) }}" class="btn btn-warning">Modifier</a>
 							</td>
 							<td>
 								<a href="{{path('recipe.delete', { id: recipe.id})}}" class="btn btn-danger">Supprimer</a>

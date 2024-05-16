@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\RecipeRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home.index')]
-    public function index(): Response
+    #[Route('/', name: 'home.index', methods: ['GET'])]
+    public function index( RecipeRepository $repository): Response
     {
         return $this->render('pages/home.html.twig', [
-            'controller_name' => 'HomeController',
+            'recipes' => $repository->findPublicRecipe(30),
         ]);
     }
 }

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CookShare -
+	{{recipe.name}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="mt-4">{{recipe.name}}</h1>
+
+		<span class="badge bg-secondary">Créer le
+			{{recipe.createdAt|date('d/m/Y')}}</span>
+
+		<div class="mt-4">
+			{% if recipe.time %}
+				<p>Temps en minute(s):
+					{{recipe.time}}</p>
+			{% else %}
+				Temps non renseigné
+			{% endif %}
+		</div>
+
+		<div class="mt-4">
+			{% if recipe.nbPeople %}
+				<p>Pour:
+					{{recipe.nbPeople}}
+					personne(s)</p>
+			{% else %}
+				Nombres de personnes non renseigné
+			{% endif %}
+		</div>
+
+		<div class="mt-4">
+			{% if recipe.difficulty %}
+				<p>Difficulté:
+					{{recipe.difficulty}}/5</p>
+			{% else %}
+				Difficulté non renseigné
+			{% endif %}
+		</div>
+
+		<div class="mt-4">
+			{% if recipe.difficulty %}
+				<p>Prix :
+					{{recipe.price}}
+					€</p>
+			{% else %}
+				Prix non renseigné
+			{% endif %}
+		</div>
+
+		<div class="mt-4">
+			{% if recipe.description %}
+				<p>Description:</p>
+				<article>{{recipe.description|raw}}</article>
+			{% else %}
+				Description non renseigné
+			{% endif %}
+		</div>
+
+		<div class="mt-4">
+			<p class="mt-4">Ingredients:</p>
+			{% for ingredient in recipe.ingredients %}
+				<span class="badge bg-secondary">
+					{{ ingredient.name }}</span>
+			{% endfor %}
+		</div>
+
+	</div>
+{% endblock %}
