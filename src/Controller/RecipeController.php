@@ -40,9 +40,6 @@ class RecipeController extends AbstractController
     }
 
 
-
-
-
     //creer une recette
     #[Route('/recipe/creation', name: 'recipe.new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
@@ -110,6 +107,11 @@ class RecipeController extends AbstractController
         Recipe $recipe,
         EntityManagerInterface $manager
     ): Response {
+
+        //verifie si c'est la propriété de la recette
+        if ($recipe->getUser() !== $this->getUser()) {
+            throw new AccessDeniedException('Vous ne pouvez pas voir cette recette car vous n\'en êtes pas le propriétaire de cette recette.');
+        }
         $manager->remove($recipe);
         $manager->flush();
         $this->addFlash('success', 'La recette a bien été supprimé avec succès!');
@@ -131,6 +133,8 @@ class RecipeController extends AbstractController
         ]);
     }
 
+
+    //afficher une recette
     #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET', 'POST'])]
     public function show(
         Recipe $recipe,

@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
@@ -40,7 +39,7 @@ class IngredientController extends AbstractController
     }
 
     //nouvelle ingredient
-    #[Route('/ingredient/nouveau', name: 'ingredient.new', methods: ['GET', 'POST'])]
+    #[Route('/ingredient/creation', name: 'ingredient.new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function new(
         Request $request,
@@ -105,6 +104,11 @@ class IngredientController extends AbstractController
         Ingredient $ingredient,
         EntityManagerInterface $manager
     ): Response {
+        // Vérifie si l'utilisateur est le propriétaire de l'ingrédient
+        if ($ingredient->getUser() !== $this->getUser()) {
+            throw new AccessDeniedException('Vous ne pouvez pas supprimer cet ingrédient car vous n\'en êtes pas le propriétaire de cet ingrédient.');
+        }
+
         $manager->remove($ingredient);
         $manager->flush();
         $this->addFlash('success', 'L\'ingrédient a bien été supprimé avec succès!');

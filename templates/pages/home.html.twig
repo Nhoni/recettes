@@ -20,7 +20,11 @@
 					<div class="col-md-4 mb-4">
 						<div
 							class="card">
-							
+							 {% if recipe.imageFile %}
+							                            <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" class="card-img-top" alt="{{ recipe.name }}">
+							                        {% else %}
+							                            <img src="{{ asset('images/default_recipe_image.jpg') }}" class="card-img-top" alt="{{ recipe.name }}">
+							                        {% endif %} 
 							<div class="card-body">
 								<h5 class="card-title">{{ recipe.name }}</h5>
 								<ul class="list-unstyled mb-3">
@@ -32,7 +36,7 @@
 										{{ recipe.difficulty }}</li>
 								</ul>
 								<p class="card-text">{{ recipe.description }}</p>
-								<a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-secondary">Voir la recette</a>
+								<a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-primary">Voir la recette</a>
 							</div>
 						</div>
 					</div>

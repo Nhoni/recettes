@@ -11,7 +11,7 @@
 			{{ encore_entry_link_tags('app') }}
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/united/bootstrap.min.css">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/united/_variables.scss">
-			{# <link rel="stylesheet" href="/style.css"> #}
+			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
 		{% endblock %}
 
 
@@ -26,8 +26,6 @@
 		{% block header %}
 			{% include 'partials/_header.html.twig' %}
 		{% endblock %}
-		{% block body %}
-			
-		{% endblock %}
+		{% block body %}{% endblock %}
 	</body>
 </html>
