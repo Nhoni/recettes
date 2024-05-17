@@ -7,13 +7,8 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav me-auto">
                 {% if app.user %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('recipe.index') }}">Mes Recettes</a>
-                    </li> 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('ingredient.index') }}">Mes Ingrédients</a>
-                    </li>
-                     <li class="nav-item dropdown">
+
+                <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              {{ app.user.fullname }} 
                         </a>
@@ -24,7 +19,14 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
                         </div> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('recipe.index') }}">Mes Recettes</a>
                     </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('ingredient.index') }}">Mes Ingrédients</a>
+                    </li>
+                      
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('security.login') }}">Connexion</a>
@@ -33,6 +35,9 @@
                         <a class="nav-link" href="{{ path('security.registration') }}">Inscription</a>
                     </li>
                 {% endif %}
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ path('contact.index') }}">Contact</a>
+                    </li>
             </ul> 
             <form class="d-flex">
                 <input class="form-control me-sm-2" type="search" placeholder="Search">
