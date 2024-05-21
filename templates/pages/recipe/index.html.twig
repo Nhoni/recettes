@@ -14,7 +14,7 @@
 		{% if not recipes.items is same as ([]) %}
 			<h1>Mes recettes</h1>
 
-			<a href="{{path('recipe.new')}}" class="btn btn-secondary mt-4">
+			<a href="{{path('recipe.new')}}" class="btn btn-primary mt-4">
 				Créer une recette
 			</a>
 
@@ -76,7 +76,7 @@
 				{{ knp_pagination_render(recipes) }}
 			</div>
 		{% else %}
-			<a href="{{path('recipe.new')}}" class="btn btn-secondary mt-4">
+			<a href="{{path('recipe.new')}}" class="btn btn-primary mt-4">
 				Créer une recette
 			</a>
 			<h4 class="mt-4">Il n'y a pas de recette(s)</h4>

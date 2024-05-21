@@ -17,8 +17,8 @@ class IngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name',TextType::class, [
-                'attr'=> [
+            ->add('name', TextType::class, [
+                'attr' => [
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
@@ -33,8 +33,8 @@ class IngredientType extends AbstractType
                 ],
             ])
 
-            ->add('price',MoneyType::class, [
-                'attr'=> [
+            ->add('price', MoneyType::class, [
+                'attr' => [
                     'class' => 'form-control',
                 ],
                 'label' => 'Prix',
@@ -49,12 +49,11 @@ class IngredientType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-secondary mt-4',
+                    'class' => 'btn btn-primary mt-4',
                 ],
                 'label' => 'Enregistrer',
-                
-            ])
-        ;
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

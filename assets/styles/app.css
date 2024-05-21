@@ -75,3 +75,73 @@ h1, h2, h3, h4, h5, h6 {
 .form-image img{
     width: 500px;
 }
+
+
+/* cards */
+
+.card {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.308);
+}
+
+.card-img-top-wrapper {
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/* show recipe */
+.recipe-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 767.98px) {
+    .recipe-image img {
+        margin-bottom: 1rem;
+    }
+}
+
+
+
+/* show recipe */
+.recipe-image img {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.badge {
+    font-size: 1rem;
+}
+.recipe-details p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.description-article {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+.star-rating .fa {
+    font-size: 2rem;
+    color: #ffc107;
+}
+.form-group {
+    margin-top: 2rem;
+}
+.star-rating .fa:hover,
+.star-rating .fa:hover ~ .fa {
+    color: #fd7e14;
+}
+
+
+

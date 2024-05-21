@@ -128,8 +128,9 @@ class RecipeController extends AbstractController
             50
         );
 
-        return $this->render('pages/recipe/index_public.html.twig', [
+        return $this->render('pages/recipe/community.html.twig', [
             'recipes' => $recipes,
+            
         ]);
     }
 

@@ -1,50 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}CookShare- Accueil
+{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <div class="jumbotron">
-				<h1 class="display-4">Bienvenue sur CookSahre</h1>
-				<p class="lead">CookShare is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<hr class="my-4">
-			</div>
-    </div>
 
 	<div class="container mt-4">
-		{% if recipes|length > 0 %}
-			<h1 class="mb-4">Recettes de la communauté</h1>
-
-			<div class="row mt-4">
-				{% for recipe in recipes %}
-					<div class="col-md-4 mb-4">
-						<div
-							class="card">
-							 {% if recipe.imageFile %}
-							                            <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" class="card-img-top" alt="{{ recipe.name }}">
-							                        {% else %}
-							                            <img src="{{ asset('images/default_recipe_image.jpg') }}" class="card-img-top" alt="{{ recipe.name }}">
-							                        {% endif %} 
-							<div class="card-body">
-								<h5 class="card-title">{{ recipe.name }}</h5>
-								<ul class="list-unstyled mb-3">
-									<li>
-										<i class="fas fa-clock"></i>
-										{{ recipe.time }}</li>
-									<li>
-										<i class="fas fa-trophy"></i>
-										{{ recipe.difficulty }}</li>
-								</ul>
-								<p class="card-text">{{ recipe.description }}</p>
-								<a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-primary">Voir la recette</a>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-
-		{% else %}
-			<h4>Il n'y a pas de recettes.</h4>
-		{% endif %}
+		<div class="jumbotron">
+			<h1 class="display-4">Bienvenue sur CookSahre</h1>
+			<p class="lead">N'hésitez pas à vous inscrire pour pouvoir partager vos idées de recettes et agrandir la communauté.</p>
+			<hr class="my-4">
+		</div>
 	</div>
+
+	{% include 'pages/recipe/community.html.twig' %}
+
+	
+
 {% endblock %}

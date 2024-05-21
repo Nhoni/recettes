@@ -30,7 +30,7 @@ class ContactType extends AbstractType
                     'class' => 'form-label  mt-4'
                 ]
             ])
-            ->add('email',EmailType::class, [
+            ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlenght' => '2',
@@ -46,7 +46,7 @@ class ContactType extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
-            ->add('subject',TextType::class, [
+            ->add('subject', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlenght' => '2',
@@ -60,7 +60,7 @@ class ContactType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50]),
                 ]
             ])
-            ->add('message',TextareaType::class, [
+            ->add('message', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlenght' => '2',
@@ -76,9 +76,8 @@ class ContactType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
-                'attr' => ['class' => 'btn btn-secondary mt-4']
-            ])
-        ;
+                'attr' => ['class' => 'btn btn-primary mt-4']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
