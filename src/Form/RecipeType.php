@@ -134,6 +134,16 @@ class RecipeType extends AbstractType
 
 
             ])
+            ->add('isPublic', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input',
+                ],
+                'required' => true, // 
+                'label' => 'Publique ? ',
+                'label_attr' => [
+                    'class' => 'form-check-label'
+                ],
+            ])
 
             ->add('imageFile', VichImageType::class, [
                 'required' => false,

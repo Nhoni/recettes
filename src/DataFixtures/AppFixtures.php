@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
 
         //recipes
         $recipes = [];
-        for ($r = 0; $r < 50; $r++) {
+        for ($r = 0; $r < 100; $r++) {
             $recipe = new Recipe();
             $recipe->setName($this->faker->word())
                 ->setTime(mt_rand(0, 1) == 1 ? mt_rand(0, 1440) : null)
@@ -74,7 +74,7 @@ class AppFixtures extends Fixture
                 ->setDescription($this->faker->text(300))
                 ->setPrice(mt_rand(0, 1) == 1 ? mt_rand(0, 1000) : null)
                 ->setIsFavorite(mt_rand(0, 1) == 1 ? true : false)
-                ->setPublic(mt_rand(0, 1) == 1 ? true : false)
+                ->setIsPublic(mt_rand(0, 1) == 1 ? true : false)
                 ->setUser($users[mt_rand(0, count($users) - 1)]);
 
             for ($i = 0; $i < mt_rand(5, 15); $i++) {

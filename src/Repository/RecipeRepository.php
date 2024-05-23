@@ -17,13 +17,13 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     public function findPublicRecipe(?int $nbRecipes): array
-    {
-        $qb = $this->createQueryBuilder('r')
-            ->where('r.isPublic = 1')
-            ->orderBy('r.id', 'DESC');
+    {// la fonction permet de récupérer les recettes publiées
+        $qb = $this->createQueryBuilder('r') // Requête Builder pour récupérer les recettes publiées
+            ->where('r.isPublic = 1') //On récupère uniquement les recettes publiques
+            ->orderBy('r.id', 'ASC');// On trie les recettes par id croissant
 
-        if ($nbRecipes === 0 || !$nbRecipes === null) {
-            $qb->setMaxResults($nbRecipes);
+        if ($nbRecipes === 0 || !$nbRecipes === null) { // Si le nombre de recettes vaut 0 ou null
+            $qb->setMaxResults($nbRecipes);// On récupère le nombre de recettes voulues
         }
 
         return $qb

@@ -28,7 +28,7 @@ class MarkType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Enregistrer'
+                'label' => 'Noter'
             ]);
     }
 

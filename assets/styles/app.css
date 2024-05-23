@@ -119,6 +119,16 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.recipe-image img {
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 300px;
+    min-height: 300px;
+    object-fit: cover;
+}
+
 .badge {
     font-size: 1rem;
 }
@@ -140,8 +150,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 .star-rating .fa:hover,
 .star-rating .fa:hover ~ .fa {
-    color: #fd7e14;
+    color: #00000036;
 }
-
-
-
