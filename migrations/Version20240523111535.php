@@ -18,15 +18,16 @@ final class Version20240523111535 extends AbstractMigration
     }
 
     public function up(Schema $schema): void
-    {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE category_recipe DROP FOREIGN KEY FK_D5607B4C12469DE2');
-        $this->addSql('ALTER TABLE category_recipe DROP FOREIGN KEY FK_D5607B4C59D8A214');
-        $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C59D8A214');
-        $this->addSql('DROP TABLE category');
-        $this->addSql('DROP TABLE category_recipe');
-        $this->addSql('DROP TABLE comment');
-    }
+{
+    // this up() migration is auto-generated, please modify it to your needs
+$this->addSql('ALTER TABLE category_recipe DROP FOREIGN KEY FK_D5607B4C12469DE2');
+$this->addSql('ALTER TABLE category_recipe DROP FOREIGN KEY FK_D5607B4C59D8A214');
+$this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C59D8A214');
+$this->addSql('ALTER TABLE your_table_name DROP COLUMN user_id');
+$this->addSql('DROP TABLE category');
+$this->addSql('DROP TABLE category_recipe');
+$this->addSql('DROP TABLE comment');
+}
 
     public function down(Schema $schema): void
     {
