@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Mark;
 use App\Entity\User;
 use App\Entity\Recipe;
+use App\Entity\Comment;
 use App\Entity\Contact;
 use App\Entity\Category;
 use App\Entity\Ingredient;
@@ -38,7 +39,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Ingrédients', 'fas fa-cake', Ingredient::class);
         yield MenuItem::linkToCrud('Notes', 'fas fa-star', Mark::class);
         yield MenuItem::linkToCrud('Contact', 'fas fa-envelope', Contact::class);
-        
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
 
     }
 }
