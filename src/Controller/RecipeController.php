@@ -183,7 +183,7 @@ class RecipeController extends AbstractController
             $manager->persist($comment);
             $manager->flush();
 
-            $this->addFlash('success', 'Votre commentaire a bien été enregistré. Il sera soumis à modération dans les plus brefs délais.');
+            $this->addFlash('success', 'Votre commentaire a bien été enregistré.');
 
             return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
         }
