@@ -1,107 +1,154 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CookShare - {{ recipe.name }}{% endblock %}
+{% block title %}CookShare -
+	{{ recipe.name }}
+{% endblock %}
 
 {% block body %}
-    <div class="container my-5">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">{{ message }}</div>
-        {% endfor %}
+	<div class="container my-5">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">{{ message }}</div>
+		{% endfor %}
 
-        <h1 class="mt-4 text-center">{{ recipe.name }}</h1>
+		<h1 class="mt-4 text-center">{{ recipe.name }}</h1>
 
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="recipe-image text-center">
-                    {% set imagePath = vich_uploader_asset(recipe, 'imageFile') %}
-                    {% if imagePath %}
-                        <img class="img-fluid rounded" src="{{ imagePath }}" alt="{{ recipe.name }}">
-                    {% else %}
-                        <img class="img-fluid rounded" src="{{ asset('images/image.PNG') }}" alt="Default image">
-                    {% endif %}
-                </div>
-            </div>
-            <div class="col-md-6 recipe-details">
-                <p class="mt-3">La moyenne de cette recette est de
-                    <span class="badge bg-primary">{{ recipe.average | number_format(2, '.', '.') }}/5</span>
-                </p>
- 
-                <p>
-                    <span class="badge bg-primary">Créée le {{ recipe.createdAt | date('d/m/Y') }}</span>
-                </p>
+		<div class="row mt-4">
+			<div class="col-md-6">
+				<div class="recipe-image text-center">
+					{% set imagePath = vich_uploader_asset(recipe, 'imageFile') %}
+					{% if imagePath %}
+						<img class="img-fluid rounded" src="{{ imagePath }}" alt="{{ recipe.name }}">
+					{% else %}
+						<img class="img-fluid rounded" src="{{ asset('images/image.PNG') }}" alt="Default image">
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-md-6 recipe-details">
+				<p class="mt-3">La moyenne de cette recette est de
+					<span class="badge bg-primary">{{ recipe.average | number_format(2, '.', '.') }}/5</span>
+				</p>
 
-                <div class="mt-4">
-                    {% if recipe.time %}
-                        <p><strong>Temps en minute(s):</strong> {{ recipe.time|min_to_hour }}</p>
-                    {% else %}
-                        <p><strong>Temps:</strong> non renseigné</p>
-                    {% endif %}
-                </div>
+				<p>
+					<span class="badge bg-primary">Créée le
+						{{ recipe.createdAt | date('d/m/Y') }}</span>
+				</p>
 
-                <div class="mt-4">
-                    {% if recipe.nbPeople %}
-                        <p><strong>Pour:</strong> {{ recipe.nbPeople }} personne(s)</p>
-                    {% else %}
-                        <p><strong>Nombre de personnes:</strong> non renseigné</p>
-                    {% endif %}
-                </div>
+				<div class="mt-4">
+					{% if recipe.time %}
+						<p>
+							<strong>Temps en minute(s):</strong>
+							{{ recipe.time|min_to_hour }}</p>
+					{% else %}
+						<p>
+							<strong>Temps:</strong>
+							non renseigné</p>
+					{% endif %}
+				</div>
 
-                <div class="mt-4">
-                    {% if recipe.difficulty %}
-                        <p><strong>Difficulté:</strong> {{ recipe.difficulty }}/5</p>
-                    {% else %}
-                        <p><strong>Difficulté:</strong> non renseigné</p>
-                    {% endif %}
-                </div>
+				<div class="mt-4">
+					{% if recipe.nbPeople %}
+						<p>
+							<strong>Pour:</strong>
+							{{ recipe.nbPeople }}
+							personne(s)</p>
+					{% else %}
+						<p>
+							<strong>Nombre de personnes:</strong>
+							non renseigné</p>
+					{% endif %}
+				</div>
 
-                <div class="mt-4">
-                    {% if recipe.price %}
-                        <p><strong>Prix:</strong> {{ recipe.price }} €</p>
-                    {% else %}
-                        <p><strong>Prix:</strong> non renseigné</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+				<div class="mt-4">
+					{% if recipe.difficulty %}
+						<p>
+							<strong>Difficulté:</strong>
+							{{ recipe.difficulty }}/5</p>
+					{% else %}
+						<p>
+							<strong>Difficulté:</strong>
+							non renseigné</p>
+					{% endif %}
+				</div>
 
-        <div class="mt-5">
-            {% if recipe.description %}
-                <h3>Description</h3>
-                <article class="description-article">{{ recipe.description | raw }}</article>
-            {% else %}
-                <p><strong>Description:</strong> non renseigné</p>
-            {% endif %}
-        </div>
+				<div class="mt-4">
+					{% if recipe.price %}
+						<p>
+							<strong>Prix:</strong>
+							{{ recipe.price }}
+							€</p>
+					{% else %}
+						<p>
+							<strong>Prix:</strong>
+							non renseigné</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 
-        <div class="mt-5">
-            <h3>Ingrédients</h3>
-            {% if recipe.ingredients is not empty %}
-                <ul class="list-inline">
-                    {% for ingredient in recipe.ingredients %}
-                        <li class="list-inline-item">
-                            <span class="badge bg-primary">{{ ingredient.name }}</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Ingrédients non renseignés</p>
-            {% endif %}
-        </div>
+		<div class="mt-5">
+			{% if recipe.description %}
+				<h3>Description</h3>
+				<article class="description-article">{{ recipe.description | raw }}</article>
+			{% else %}
+				<p>
+					<strong>Description:</strong>
+					non renseigné</p>
+			{% endif %}
+		</div>
 
-        <hr class="my-5">
+		<div class="mt-5">
+			<h3>Ingrédients</h3>
+			{% if recipe.ingredients is not empty %}
+				<ul class="list-inline">
+					{% for ingredient in recipe.ingredients %}
+						<li class="list-inline-item">
+							<span class="badge bg-primary">{{ ingredient.name }}</span>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>Ingrédients non renseignés</p>
+			{% endif %}
+		</div>
 
-        <div class="form-group">
-            {{ form_start(form) }}
-            <div class="star-rating">
-                <i class="fa fa-star" data-rating="1"></i>
-                <i class="fa fa-star" data-rating="2"></i>
-                <i class="fa fa-star" data-rating="3"></i>
-                <i class="fa fa-star" data-rating="4"></i>
-                <i class="fa fa-star" data-rating="5"></i>
-                {{ form_widget(form.mark, {'attr': {'class': 'd-none'}}) }}
-            </div>
-            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary mt-4'}}) }}
-            {{ form_end(form) }}
-        </div>
-    </div>
-{% endblock %}
+		<hr class="my-5">
+
+		<div class="form-group">
+			{{ form_start(form) }}
+			<div class="star-rating">
+				<i class="fa fa-star" data-rating="1"></i>
+				<i class="fa fa-star" data-rating="2"></i>
+				<i class="fa fa-star" data-rating="3"></i>
+				<i class="fa fa-star" data-rating="4"></i>
+				<i class="fa fa-star" data-rating="5"></i>
+				{{ form_widget(form.mark, {'attr': {'class': 'd-none'}}) }}
+			</div>
+			{{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary mt-4'}}) }}
+			{{ form_end(form) }}
+		</div>
+
+		<hr>
+
+		<div class="mt-5">
+			<h2 class="h4 mb-4"><span></span>Commentaire(s)</h2>
+			<div class="comments">
+				{% if app.user %}
+					<div class="comments__new mb-4">
+						{{ form_start(commentForm) }}
+						<div class="form-group">
+							{{ form_label(commentForm.content, 'Nouveau commentaire', {'label_attr': {'class': 'form-label custom-label-class'}}) }}
+							{{ form_widget(commentForm.content, {'attr': {'class': 'form-control custom-input-class'}}) }}
+						</div>
+						<button class="btn btn-primary mt-3 custom-button-class" type="submit">
+							Poster mon commentaire
+						</button>
+						{{ form_end(commentForm) }}
+					</div>
+				{% endif %}
+				<hr>
+				{% for comment in recipe.comments %}
+					{% include 'components/_comment.html.twig' %}
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}

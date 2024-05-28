@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -93,6 +94,10 @@ class Recipe
     #[ORM\OneToMany(targetEntity: Mark::class, mappedBy: 'recipe', orphanRemoval: true)]
     private Collection $marks;
 
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $comments;
+
+
     private ?float $average = null;
 
     public function __construct()
@@ -101,6 +106,7 @@ class Recipe
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->marks = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
     #[ORM\PrePersist]
     public function setUpdatedAtValue()
@@ -232,7 +238,7 @@ class Recipe
         return $this;
     }
 
-    
+
     public function isPublic(): ?bool
     {
         return $this->isPublic;
@@ -307,7 +313,7 @@ class Recipe
 
     /**
      * Get the value of isPublic
-     */ 
+     */
     public function getIsPublic()
     {
         return $this->isPublic;
@@ -343,6 +349,30 @@ class Recipe
         return $this;
     }
 
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): Self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = ($comment);
+            $comment->setRecipe($this);
+        }
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): Self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getRecipe() === $this) {
+                $comment->setRecipe(null);
+            }
+        }
+        return $this;
+    }
 
     public function getAverage()
     {

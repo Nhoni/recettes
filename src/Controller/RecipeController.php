@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Mark;
 use App\Entity\Recipe;
 use App\Form\MarkType;
+use App\Entity\Comment;
 use App\Form\RecipeType;
+use App\Form\CommentType;
 use App\Repository\MarkRepository;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -168,12 +170,31 @@ class RecipeController extends AbstractController
             return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
         }
 
+        // Commentaires
+        $comment = new Comment();
+        $comment->setRecipe($recipe);
+        if ($this->getUser()) {
+            $comment->setAuthor($this->getUser());
+        }
+
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre commentaire a bien été enregistré. Il sera soumis à modération dans les plus brefs délais.');
+
+            return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
+        }
+
         // Vérifier si la recette est publique
         if ($recipe->getIsPublic()) {
             // La recette est publique, donc accessible à tous (utilisateurs connectés et visiteurs)
             return $this->render('pages/recipe/show.html.twig', [
                 'recipe' => $recipe,
                 'form' => $form->createView(),
+                'commentForm' => $commentForm->createView()
             ]);
         } else {
             // La recette n'est pas publique, vérifier si l'utilisateur est connecté et s'il est le propriétaire
@@ -182,6 +203,7 @@ class RecipeController extends AbstractController
                 return $this->render('pages/recipe/show.html.twig', [
                     'recipe' => $recipe,
                     'form' => $form->createView(),
+                    'commentForm' => $commentForm->createView()
                 ]);
             } else {
                 // L'utilisateur n'est pas connecté ou n'est pas le propriétaire de la recette

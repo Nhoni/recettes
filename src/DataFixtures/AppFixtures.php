@@ -7,6 +7,7 @@ use App\Entity\Mark;
 use App\Entity\User;
 use Faker\Generator;
 use App\Entity\Recipe;
+use App\Entity\Comment;
 use App\Entity\Contact;
 use App\Entity\Ingredient;
 use Doctrine\Persistence\ObjectManager;
@@ -108,6 +109,21 @@ class AppFixtures extends Fixture
 
             $manager->persist($contact);
         }
+
+
+        //Comments
+        foreach ($recipes as $recipe) {
+            for ($i = 0; $i < mt_rand(0, 15); $i++) {
+                $comment = new Comment();
+                $comment->setContent($this->faker->realtext)
+                    ->setAuthor($users[mt_rand(0, count($users) - 1)])
+                    ->setRecipe($recipe);
+
+                $manager->persist($comment);
+                $recipe->addComment($comment);
+            }
+        }
+
         $manager->flush();
     }
 }
