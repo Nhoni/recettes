@@ -32,4 +32,14 @@ class RecipeRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByQuery($query)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.name LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

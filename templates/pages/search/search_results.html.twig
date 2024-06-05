@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la recherche pour "{{ query }}"</h1>
+
+    <ul>
+        {% for recipe in recipes %}
+            <li>{{ recipe.name }}</li>
+        {% else %}
+            <li>Aucune recette trouvée.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="navigation d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(recipes) }}
+    </div>
+{% endblock %}

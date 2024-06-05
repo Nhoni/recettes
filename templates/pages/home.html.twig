@@ -5,7 +5,7 @@
 
 {% block body %}
 
-	{% if app.user %}
+	{# {% if app.user %}
 		<div class="container mt-4">
 			<div class="jumbotron">
 				<h2 class="display-4">hey!! {{ app.user.fullname }} Bienvenue sur CookShare !</h2>
@@ -23,9 +23,7 @@
 				<h4 class="mb-0">Inscrivez-vous dès maintenant pour accéder à toutes les fonctionnalités de CookShare, telles que la sauvegarde de vos recettes préférées, l'interaction avec d'autres membres et bien plus encore !</h4>
 			</div>
 		</div>
-	{% endif %}
-	
-	
+	{% endif %} #}
 
 	{% include 'pages/recipe/community.html.twig' %}
 
