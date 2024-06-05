@@ -7,9 +7,15 @@
 body {
     font-family: 'Open Sans', sans-serif;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif;
+.container {
+    max-width: 1200px;
+    margin: auto;
 }
+h1, h3, h4 {
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* utils */
 .mt-4 {
     margin-top: 4rem;
@@ -155,29 +161,342 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-.search-container {
+/* Custom styles for navbar */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-nav .nav-link {
+    color: #333333;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #e60023;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: #333333;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #e60023;
+}
+
+.search .form-control {
+    width: 300px;
+}
+
+.search .btn {
+    background-color: #e60023;
+    color: #fff;
+}
+
+.search .btn:hover {
+    background-color: #d4001f;
+}
+
+/* Adjust the form control and button to match the Pinterest theme */
+.form-control {
+    border: 1px solid #e0e0e0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #e60023;
+}
+
+
+
+
+/* cards */
+.pinterest-card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.pinterest-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.card-img-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    background-color: #fff;
+    padding: 16px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    height: 100%;
 }
 
-.search-container input {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
-    outline: none;
+.card-title {
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
 }
 
-.search-container button {
-    padding: 10px 15px;
+.card-text {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+}
+
+.list-inline-item {
+    color: #999;
+    font-size: 0.75rem;
+}
+
+.btn-primary {
+    background-color: #e60023;
     border: none;
-    background-color: #007BFF;
-    color: white;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #d4001f;
+}
+
+@media (max-width: 576px) {
+    .pinterest-card {
+        margin-bottom: 24px;
+    }
+}
+
+
+/* show recipe */
+.recipe-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-details p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #555;
+}
+
+.recipe-details .badge {
+    background-color: #e60023;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.recipe-details strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.description-article {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #555;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-inline-item .badge {
+    background-color: #e60023;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.star-rating .fa-star {
+    color: #ffc107;
+    font-size: 2rem;
+    margin-right: 0.5rem;
     cursor: pointer;
-    border-radius: 0 4px 4px 0;
 }
 
-.search-container button i {
-    margin-right: 5px;
+.form-group {
+    margin-top: 2rem;
 }
 
+.custom-label-class {
+    color: #333;
+    font-weight: 600;
+}
+
+.custom-input-class {
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    width: 100%;
+}
+
+.custom-button-class {
+    background-color: #e60023;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.custom-button-class:hover {
+    background-color: #cc001f;
+}
+
+.comments {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Pinterest-like styles */
+
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    height: 100%;
+}
+
+h1, h4 {
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.list-inline-item {
+    margin-right: 0.5rem;
+}
+
+.list-inline-item i {
+    color: #e60023;
+    margin-right: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #e60023;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #cc001f;
+}
+
+.btn-sm {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.navigation {
+    margin-top: 2rem;
+}
+
+.alert {
+    background-color: #e60023;
+    color: #fff;
+    border: none;
+}
+
+
+
+.footer {
+    background-color: #fafafa;
+    color: #333;
+}
+
+.footer .font-weight-bold {
+    font-weight: bold;
+}
+
+.footer a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #f60029;
+}
+
+.footer .fab {
+    margin-right: 8px;
+}
+
+.footer .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 10px;
+}
+
+.footer .text-center {
+    margin-top: 20px;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 767.98px) {
+    .footer .col-md-3 {
+        margin-bottom: 20px;
+    }
+}

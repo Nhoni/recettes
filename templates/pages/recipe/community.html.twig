@@ -1,12 +1,12 @@
 <div class="container mt-5">
     {% if recipes|length > 0 %}
-        <h1 class="mt-4">Recettes de la communauté</h1>
+        <h1 class="mt-4">CookShare recettes de la communauté</h1>
 
         <div class="row mt-4">
             {% for recipe in recipes %}
                 {% if recipe.isPublic %}
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 border-0 shadow-sm">
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <div class="card pinterest-card border-0 shadow-sm">
                             <div class="card-img-top-wrapper">
                                 {% set imagePath = vich_uploader_asset(recipe, 'imageFile') %}
                                 {% if imagePath %}
@@ -28,7 +28,7 @@
                                     </li>
                                 </ul>
                                 <p class="card-text">{{ recipe.description|length > 100 ? recipe.description|slice(0, 100) ~ '...' : recipe.description }}</p>
-                                <a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-outline-primary mt-auto">Voir la recette</a>
+                                <a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-primary mt-auto">Voir la recette</a>
                             </div>
                         </div>
                     </div>
@@ -37,6 +37,6 @@
         </div>
 
     {% else %}
-        <h4>Il n'y a pas de recettes publiques.</h4>
+        <h4>Il n'y a pas de recettes </h4>
     {% endif %}
 </div>

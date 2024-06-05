@@ -1,85 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CookShare - Mes recettes
-{% endblock %}
+{% block title %}CookShare - Mes recettes{% endblock %}
 
 {% block body %}
-	<div class="container mt-4">
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success mt-4">
-				{{ message }}
-			</div>
-		{% endfor %}
-		
-		{% if not recipes.items is same as ([]) %}
-			<h1>Mes recettes</h1>
+    <div class="container mt-4">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        {% if not recipes.items is same as ([]) %}
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>Mes recettes</h1>
+                <a href="{{ path('recipe.new') }}" class="btn btn-primary">Créer une recette</a>
+            </div>
 
-			<a href="{{path('recipe.new')}}" class="btn btn-primary mt-4">
-				Créer une recette
-			</a>
+            <div class="count mt-4">
+                <h4>Il y a {{ recipes.getTotalItemCount }} recette(s) au total</h4>
+            </div>
 
-			<div class="count mt-4">
-				<h4>Il y a
-					{{ recipes.getTotalItemCount }}
-					recette(s) au total</h4>
-			</div>
+            <div class="row mt-4">
+                {% for recipe in recipes %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-img-top-wrapper">
+                                {% set imagePath = vich_uploader_asset(recipe, 'imageFile') %}
+                                {% if imagePath %}
+                                    <img class="card-img-top" src="{{ imagePath }}" alt="{{ recipe.name }}">
+                                {% else %}
+                                    <img class="card-img-top" src="{{ asset('images/image.PNG') }}" alt="Default image">
+                                {% endif %}
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title font-weight-bold">{{ recipe.name }}</h5>
+                                <ul class="list-inline text-muted mb-3">
+                                    <li class="list-inline-item">
+                                        <i class="fas fa-euro-sign"></i>
+                                        {{ recipe.price is null ? 'Non renseigné' : recipe.price|number_format(2, '.', '.') ~ ' €' }}
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="fas fa-trophy"></i>
+                                        {{ recipe.difficulty is null ? 'Non renseigné' : recipe.difficulty }}
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        {{ recipe.createdAt|date('d/m/Y') }}
+                                    </li>
+                                </ul>
+                                <div class="mt-auto">
+                                    <a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-info btn-sm">Voir</a>
+                                    <a href="{{ path('recipe.edit', { id: recipe.id }) }}" class="btn btn-warning btn-sm">Modifier</a>
+                                    <a href="{{ path('recipe.delete', { id: recipe.id }) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
 
-			<table class="table table-hover mt-4">
-				<thead>
-					<tr>
-						<th scope="col">Numéro</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Prix</th>
-						<th scope="col">Difficulté</th>
-						<th scope="col">Date de création</th>
-						<th scope="col">Voir</th>
-						<th scope="col">Modifier</th>
-						<th scope="col">Supprimer</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for recipe in recipes %}
-						<tr class="table-active">
-							<th scope="row">{{ recipe.id }}</th>
-							<td>{{ recipe.name }}</td>
-							<td>
-								{% if recipe.price is null  %}
-									Non renseigné
-								{% else %}
-									{{ recipe.price|number_format(2,'.','.')}}
-									€
-								{% endif %}
-							</td>
-							<td>
-								{% if recipe.difficulty is null  %}
-									Non renseigné
-								{% else %}
-									{{ recipe.difficulty }}
-								{% endif %}
-							</td>
-							<td>{{ recipe.createdAt|date('d/m/Y') }}</td>
-							<td>
-								<a href="{{path('recipe.show', { id: recipe.id}) }}" class="btn btn-info">Voir</a>
-							</td>
-							<td>
-								<a href="{{path('recipe.edit', { id: recipe.id}) }}" class="btn btn-warning">Modifier</a>
-							</td>
-							<td>
-								<a href="{{path('recipe.delete', { id: recipe.id})}}" class="btn btn-danger">Supprimer</a>
-							</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-
-			<div class="navigation d-flex justify-content-center mt-4">
-				{{ knp_pagination_render(recipes) }}
-			</div>
-		{% else %}
-			<a href="{{path('recipe.new')}}" class="btn btn-primary mt-4">
-				Créer une recette
-			</a>
-			<h4 class="mt-4">Il n'y a pas de recette(s)</h4>
-		{% endif %}
-	</div>
+            <div class="navigation d-flex justify-content-center mt-4">
+                {{ knp_pagination_render(recipes) }}
+            </div>
+        {% else %}
+            <div class="text-center mt-4">
+                <a href="{{ path('recipe.new') }}" class="btn btn-primary">Créer une recette</a>
+                <h4 class="mt-4">Il n'y a pas de recette(s)</h4>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

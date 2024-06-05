@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -28,6 +30,11 @@ class UserCrudController extends AbstractCrudController
             ->setPaginatorPageSize(10);
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+        ->remove(Crud::PAGE_INDEX, Action::NEW);
+    }
     public function configureFields(string $pageName): iterable
     {
 
